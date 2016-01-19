@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     <!-- Root Context: defines shared resources visible to all other web components -->
-    <context:property-placeholder location="classpath:config/jdbc.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:config/jdbc.properties, classpath:config/cofig.properties" ignore-unresolvable="true"/>
 
     <context:component-scan base-package="com.piggsoft">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
