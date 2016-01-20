@@ -25,4 +25,19 @@ public class ApiInvoker {
         return ReflectionUtils.invokeMethod(this.method, target, args);
     }
 
+    public Class<?> getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Class<?> clazz) {
+        this.clazz = clazz;
+    }
+
+    public Method getMethod() {
+        return method;
+    }
+
+    public void setMethod(Method method) {
+        this.method = method;
+    }
 }
