@@ -1,9 +1,8 @@
 package com.piggsoft.lucky.api;
 
-import com.piggsoft.lucky.config.Api;
+import com.piggsoft.lucky.api_config.Api;
 import com.piggsoft.lucky.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * <br>Created by fire pigg on 2016/01/19.

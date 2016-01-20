@@ -22,7 +22,7 @@
 		</layout>
 	</appender>
 	
-	<logger name="com.piggsoft.learning">
+	<logger name="com.piggsoft.lucky">
 		<level value="debug" />
 	</logger>
 	

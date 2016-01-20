@@ -1,6 +1,6 @@
 package com.piggsoft.lucky.controller;
 
-import com.piggsoft.lucky.config.ApiHelper;
+import com.piggsoft.lucky.api_config.ApiHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

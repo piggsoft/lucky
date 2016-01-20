@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <br>Created by fire pigg on 2016/01/20.
@@ -21,11 +23,17 @@ public class Validate {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Validate.class);
     private static final String COUNT_SUBFIX = "_count";
+    private static Map<Method, ParamsValidate> PARAMS_VALIDATE_CACHE = new ConcurrentHashMap<Method, ParamsValidate>();
 
     public static void validate(HttpServletRequest request, HttpServletResponse response, Method method) {
-        ParamsValidate paramsValidate = AnnotationUtils.findAnnotation(method, ParamsValidate.class);
+
+        ParamsValidate paramsValidate = PARAMS_VALIDATE_CACHE.get(method);
         if (null == paramsValidate) {
-            return;
+            paramsValidate = AnnotationUtils.findAnnotation(method, ParamsValidate.class);
+            if (null == paramsValidate) {
+                return;
+            }
+            PARAMS_VALIDATE_CACHE.put(method, paramsValidate);
         }
 
         HttpSession session = request.getSession();

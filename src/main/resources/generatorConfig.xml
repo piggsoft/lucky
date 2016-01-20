@@ -39,6 +39,6 @@
         <table tableName="user_role"/>
         <table tableName="user_subject"/>
         <table tableName="file" domainObjectName="FileItem"/>-->
-        <table tableName="t_user" domainObjectName="User"/>
+        <table tableName="t_menu" domainObjectName="Menu"/>
     </context>
 </generatorConfiguration>
