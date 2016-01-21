@@ -1,6 +1,7 @@
 package com.piggsoft.lucky.controller;
 
 import com.piggsoft.lucky.dto.MenuDto;
+import com.piggsoft.lucky.model.Menu;
 import com.piggsoft.lucky.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,6 +27,16 @@ public class MenuController {
     @RequestMapping("/getAll")
     public List<MenuDto> getAll() {
         return menuService.getAll();
+    }
+
+    @RequestMapping("getTop")
+    public List<Menu> getTop() {
+        return menuService.getTop();
+    }
+
+    @RequestMapping("getChildren")
+    public List<Menu> getChildren(int pid) {
+        return menuService.getChild(pid);
     }
 
 }

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单管理</title>
+    <link href="css/default.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="js/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="js/themes/icon.css"/>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src='js/datagrid-detailview.js'></script>
+    <script type="text/javascript" src='js/outlook2.js'></script>
+</head>
+<body>
+<table id="dg" data-options="url: 'menu/getTop.do', singleSelect: true, fitColumns: true" style="width: 800px; min-height: 600px;">
+    <thead>
+    <tr>
+        <th data-options="field:'menuid'" width="20%">id</th>
+        <th data-options="field:'menuname'" width="25%">Name</th>
+        <th data-options="field:'icon'" width="25%">Icon</th>
+        <th data-options="field:'url'" width="20%">Url</th>
+    </tr>
+    </thead>
+</table>
+
+
+</body>
+<script type="text/javascript">
+    $(function () {
+        $('#dg').datagrid({
+            view: detailview,
+            detailFormatter: function (index, row) {
+                return '<div style="padding:2px"><table class="ddv"></table></div>';
+            },
+            onExpandRow: function (index, row) {
+                var ddv = $(this).datagrid('getRowDetail', index).find('table.ddv');
+                ddv.datagrid({
+                    url: 'menu/getChildren.do?pid=' + row.menuid,
+                    fitColumns: true,
+                    singleSelect: true,
+                    rownumbers: true,
+                    loadMsg: '',
+                    height: 'auto',
+                    columns: [[
+                        {field: 'menuid', title: 'ID', width: '20%'},
+                        {field: 'menuname', title: 'Name', width: '25%', align: 'right'},
+                        {field: 'icon', title: 'Icon', width: '25%', align: 'right'},
+                        {field: 'url', title: 'Url', width: '20%', align: 'right'}
+                    ]],
+                    onResize: function () {
+                        $('#dg').datagrid('fixDetailRowHeight', index);
+                    },
+                    onLoadSuccess: function () {
+                        setTimeout(function () {
+                            $('#dg').datagrid('fixDetailRowHeight', index);
+                        }, 0);
+                    }
+                });
+                $('#dg').datagrid('fixDetailRowHeight', index);
+            }
+        });
+    });
+</script>
+</html>

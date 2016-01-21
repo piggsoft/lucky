@@ -35,10 +35,17 @@ public class MenuService {
         return menuDtos;
     }
 
+    public List<Menu> searchAll() {
+        MenuExample example = new MenuExample();
+        example.setOrderByClause("pid ASC , order_index DESC");
+        return menuMapper.selectByExample(example);
+    }
+
     public List<Menu> getTop() {
         MenuExample example = new MenuExample();
         example.createCriteria()
                 .andPidIsNull();
+        example.setOrderByClause("order_index desc");
         return menuMapper.selectByExample(example);
     }
 
@@ -46,6 +53,7 @@ public class MenuService {
         MenuExample example = new MenuExample();
         example.createCriteria()
                 .andPidEqualTo(pid);
+        example.setOrderByClause("order_index desc");
         return menuMapper.selectByExample(example);
     }
 
