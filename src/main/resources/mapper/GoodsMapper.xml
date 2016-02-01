@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.piggsoft.lucky.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.piggsoft.lucky.model.Goods" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="INTEGER" />
+    <result column="money_in" property="moneyIn" jdbcType="DECIMAL" />
+    <result column="money_out" property="moneyOut" jdbcType="DECIMAL" />
+    <result column="create_tm" property="createTm" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, money_in, money_out, create_tm
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.piggsoft.lucky.model.GoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.piggsoft.lucky.model.GoodsExample" >
+    delete from t_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.piggsoft.lucky.model.Goods" >
+    insert into t_goods (id, name, money_in, 
+      money_out, create_tm)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=INTEGER}, #{moneyIn,jdbcType=DECIMAL}, 
+      #{moneyOut,jdbcType=DECIMAL}, #{createTm,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piggsoft.lucky.model.Goods" >
+    insert into t_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="moneyIn != null" >
+        money_in,
+      </if>
+      <if test="moneyOut != null" >
+        money_out,
+      </if>
+      <if test="createTm != null" >
+        create_tm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=INTEGER},
+      </if>
+      <if test="moneyIn != null" >
+        #{moneyIn,jdbcType=DECIMAL},
+      </if>
+      <if test="moneyOut != null" >
+        #{moneyOut,jdbcType=DECIMAL},
+      </if>
+      <if test="createTm != null" >
+        #{createTm,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.piggsoft.lucky.model.GoodsExample" resultType="java.lang.Integer" >
+    select count(*) from t_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_goods
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=INTEGER},
+      </if>
+      <if test="record.moneyIn != null" >
+        money_in = #{record.moneyIn,jdbcType=DECIMAL},
+      </if>
+      <if test="record.moneyOut != null" >
+        money_out = #{record.moneyOut,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTm != null" >
+        create_tm = #{record.createTm,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_goods
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=INTEGER},
+      money_in = #{record.moneyIn,jdbcType=DECIMAL},
+      money_out = #{record.moneyOut,jdbcType=DECIMAL},
+      create_tm = #{record.createTm,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piggsoft.lucky.model.Goods" >
+    update t_goods
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=INTEGER},
+      </if>
+      <if test="moneyIn != null" >
+        money_in = #{moneyIn,jdbcType=DECIMAL},
+      </if>
+      <if test="moneyOut != null" >
+        money_out = #{moneyOut,jdbcType=DECIMAL},
+      </if>
+      <if test="createTm != null" >
+        create_tm = #{createTm,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piggsoft.lucky.model.Goods" >
+    update t_goods
+    set name = #{name,jdbcType=INTEGER},
+      money_in = #{moneyIn,jdbcType=DECIMAL},
+      money_out = #{moneyOut,jdbcType=DECIMAL},
+      create_tm = #{createTm,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

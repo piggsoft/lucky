@@ -29,6 +29,13 @@
     $(function () {
         $('#dg').datagrid({
             view: detailview,
+            toolbar: [{
+                iconCls: 'icon-edit',
+                handler: function(){alert('edit')}
+            },'-',{
+                iconCls: 'icon-help',
+                handler: function(){alert('help')}
+            }],
             detailFormatter: function (index, row) {
                 return '<div style="padding:2px"><table class="ddv"></table></div>';
             },

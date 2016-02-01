@@ -11,17 +11,45 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- 导出 lucky 的数据库结构
+DROP DATABASE IF EXISTS `lucky`;
 CREATE DATABASE IF NOT EXISTS `lucky` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `lucky`;
 
 
+-- 导出  表 lucky.t_goods 结构
+DROP TABLE IF EXISTS `t_goods`;
+CREATE TABLE IF NOT EXISTS `t_goods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` int(11) DEFAULT NULL,
+  `money_in` decimal(10,2) DEFAULT NULL,
+  `money_out` decimal(10,2) DEFAULT NULL,
+  `create_tm` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 数据导出被取消选择。
+
+
+-- 导出  表 lucky.t_kind 结构
+DROP TABLE IF EXISTS `t_kind`;
+CREATE TABLE IF NOT EXISTS `t_kind` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 数据导出被取消选择。
+
+
 -- 导出  表 lucky.t_menu 结构
+DROP TABLE IF EXISTS `t_menu`;
 CREATE TABLE IF NOT EXISTS `t_menu` (
   `menuid` int(11) NOT NULL AUTO_INCREMENT,
   `menuname` varchar(50) DEFAULT NULL COMMENT '菜单名',
   `icon` varchar(50) DEFAULT NULL COMMENT '图标class',
   `url` varchar(250) DEFAULT NULL COMMENT '菜单链接url',
   `pid` int(11) DEFAULT NULL COMMENT '父菜单id',
+  `order_index` int(11) DEFAULT NULL COMMENT '排序index',
   PRIMARY KEY (`menuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜单';
 
@@ -29,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `t_menu` (
 
 
 -- 导出  表 lucky.t_user 结构
+DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE IF NOT EXISTS `t_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL COMMENT '用户名',

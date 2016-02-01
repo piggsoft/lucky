@@ -39,6 +39,7 @@
         <table tableName="user_role"/>
         <table tableName="user_subject"/>
         <table tableName="file" domainObjectName="FileItem"/>-->
-        <table tableName="t_menu" domainObjectName="Menu"/>
+        <table tableName="t_kind" domainObjectName="Kind"/>
+        <table tableName="t_goods" domainObjectName="Goods"/>
     </context>
 </generatorConfiguration>
